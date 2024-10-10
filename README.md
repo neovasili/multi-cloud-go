@@ -14,7 +14,7 @@ We are going to build something like:
 
 (AZURE)
 
-== WIP ==
+![High level design diagram](docs/img/azure-diagram.png)
 
 We will be writing an application that will be serving as an API both in the FaaS and Contanerized worlds that essentially picks the request content and writes a file to a blob storage service.
 
