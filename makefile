@@ -26,3 +26,27 @@ build-fargate: dependencies-go clean-fargate
 
 build-fargate-docker: build-fargate
 	@docker buildx build -f src/entrypoints/ecs-fargate/Dockerfile . -t ${ECR_REPO}:latest
+
+clean-azure-function:
+	@echo "Cleaning azure-function function"
+	@rm -rf bin/handler
+	@rm -rf bin/azure-function.zip
+	@rm -rf bin/host.json
+	@rm -rf bin/local.settings.json
+	@rm -rf bin/multi-cloud-go
+
+build-azure-function: dependencies-go clean-azure-function
+	@echo "Building azure-function function"
+	@GOOS=linux GOARCH=amd64 go build -o bin/handler src/entrypoints/azure-function/main.go
+	@cp src/entrypoints/azure-function/host.json bin/host.json
+	@cp src/entrypoints/azure-function/local.settings.json bin/local.settings.json
+	@cp -R src/entrypoints/azure-function/multi-cloud-go/ bin/multi-cloud-go/
+	@cd bin && zip -r azure-function.zip handler host.json local.settings.json multi-cloud-go/
+
+build-azure-function-local: dependencies-go clean-azure-function
+	@echo "Building azure-function function"
+	@GOOS=darwin GOARCH=arm64 go build -o bin/handler src/entrypoints/azure-function/main.go
+	@cp src/entrypoints/azure-function/host.json bin/host.json
+	@cp src/entrypoints/azure-function/local.settings.json bin/local.settings.json
+	@cp -R src/entrypoints/azure-function/multi-cloud-go/ bin/multi-cloud-go/
+	@cd bin && zip -r azure-function.zip handler host.json local.settings.json multi-cloud-go/

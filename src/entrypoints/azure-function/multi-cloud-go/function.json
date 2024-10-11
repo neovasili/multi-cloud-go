@@ -1,0 +1,19 @@
+{
+  "bindings": [
+    {
+      "authLevel": "Anonymous",
+      "type": "httpTrigger",
+      "direction": "in",
+      "name": "demoReq",
+      "methods": [
+        "post"
+      ],
+      "route": "demo"
+    },
+    {
+      "type": "http",
+      "direction": "out",
+      "name": "demoRes"
+    }
+  ]
+}

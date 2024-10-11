@@ -18,4 +18,5 @@ var Error500Response = &events.APIGatewayProxyResponse{
 
 const (
 	ContainerPort = "80"
+	AzureBlobStorageAccountUrl = "https://multicloudgodemo.blob.core.windows.net/"
 )
