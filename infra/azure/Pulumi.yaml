@@ -1,0 +1,10 @@
+name: multi-cloud-go-azure
+description: This is a demonstration program for several cloud native resources
+runtime:
+  name: nodejs
+  options:
+    packagemanager: yarn
+config:
+  pulumi:tags:
+    value:
+      pulumi:template: azure-typescript
